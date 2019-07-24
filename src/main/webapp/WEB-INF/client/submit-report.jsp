@@ -73,8 +73,9 @@
     </div>
 </div>
 
+<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/js/ajax-submit-report.js"></script>
+<script src="${pageContext.request.contextPath}/js/ajax-submit-report-form.js"></script>
 <!-- Row end -->
 </body>
 </html>

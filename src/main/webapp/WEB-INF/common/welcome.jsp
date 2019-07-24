@@ -16,7 +16,10 @@
     <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
+
+
     <jsp:include page="${pageContext.request.contextPath}/css/bootstrap_min.jsp"/>
+
     <jsp:include page="${pageContext.request.contextPath}/js/jquery.jsp"/>
     <jsp:include page="${pageContext.request.contextPath}/js/bootstrap_min.jsp"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/ajax-submit-report.js"></script>
@@ -44,7 +47,6 @@
 </header>
 
 
-<script src="${pageContext.request.contextPath}/js/ajax-submit-report.js"></script>
 </body>
 
 </html>

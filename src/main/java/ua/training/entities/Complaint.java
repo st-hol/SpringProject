@@ -33,4 +33,7 @@ public class Complaint {
     @Version
     @Column(name = "VERSION")
     private int version;
+
+
+
 }
