@@ -34,6 +34,6 @@ public class TaxableItem {
     private long price;
 
     @Version
-    @Column(name = "VERSION")
+    @Column(name = "version")
     private int version;
 }

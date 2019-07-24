@@ -31,9 +31,8 @@ public class Complaint {
     private Timestamp completionTime;
 
     @Version
-    @Column(name = "VERSION")
+    @Column(name = "version")
     private int version;
-
 
 
 }

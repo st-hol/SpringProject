@@ -46,7 +46,7 @@ public class Report {
     private String inspectorComment;
 
     @Version
-    @Column(name = "VERSION")
+    @Column(name = "version")
     private int version;
 
 

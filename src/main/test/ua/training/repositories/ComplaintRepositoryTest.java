@@ -23,35 +23,37 @@ import static org.junit.Assert.assertEquals;
 @DirtiesContext(classMode=ClassMode.AFTER_CLASS)
 public class ComplaintRepositoryTest {
 
-    private ComplaintRepository complaintRepository;
-
-    @Autowired
-    public void setComplaintRepository(ComplaintRepository complaintRepository) {
-        this.complaintRepository = complaintRepository;
-    }
-
-
-    @Test
-    public void testSave(){
-
-//        Complaint complaint = new Complaint();
+//    private ComplaintRepository complaintRepository;
 //
-//        User user = new User();
-//        user.setId(1);
-//        complaint.setUser(user);
-//        complaint.setContent("ADa231232");
-//        complaint.setCompletionTime(new Timestamp(System.currentTimeMillis()));
-//        complaintRepository.save(complaint);
+//    @Autowired
+//    public void setComplaintRepository(ComplaintRepository complaintRepository) {
+//        this.complaintRepository = complaintRepository;
+//    }
+//
+//
+//    @Test
+//    public void testSave(){
+//
+////        Complaint complaint = new Complaint();
+////
+////        User user = new User();
+////        user.setId(1);
+////        complaint.setUser(user);
+////        complaint.setContent("ADa231232");
+////        complaint.setCompletionTime(new Timestamp(System.currentTimeMillis()));
+////        complaintRepository.save(complaint);
+//
+////        //get all, list should have 5
+////        Iterable<Complaint> complaints = complaintRepository.findAll();
+////        int count = 0;
+////
+////        for(Complaint s : complaints){
+////            count++;
+////        }
+////
+////        assertEquals(count, 5);
+//    }
 
-//        //get all, list should have 5
-//        Iterable<Complaint> complaints = complaintRepository.findAll();
-//        int count = 0;
-//
-//        for(Complaint s : complaints){
-//            count++;
-//        }
-//
-//        assertEquals(count, 5);
-    }
+
 
 }

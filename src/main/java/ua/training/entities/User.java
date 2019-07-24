@@ -53,19 +53,11 @@ public class User {
     private Set<TaxableItem> taxableItems = new HashSet<>();
 
     @Version
-    @Column(name = "VERSION")
+    @Column(name = "version")
     private int version;
 
     public enum ROLE {
         INSPECTOR, CLIENT, UNKNOWN;
 
-        public int getRoleID() {
-            return ordinal() + 1;
-        }
-
-        public static ROLE getRoleById(int id) {
-            int index = id - 1;
-            return values()[index];
-        }
     }
 }
