@@ -33,22 +33,22 @@ public class AccountController {
 
     @GetMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("userForm", new User());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
 
-        userValidator.validate(user, bindingResult);
+        userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             logger.info("reg. form had errors. redirecting");
             return "registration";
         }
 
-        userService.save(user);
-        securityService.autoLoginAfterReg(user.getEmail(), user.getPasswordConfirm());
+        userService.save(userForm);
+        securityService.autoLoginAfterReg(userForm.getEmail(), userForm.getPasswordConfirm());
 
         logger.info("user registered");
         return "redirect:/registration";
