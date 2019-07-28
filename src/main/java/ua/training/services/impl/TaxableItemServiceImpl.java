@@ -1,12 +1,12 @@
 package ua.training.services.impl;
 
 import com.google.common.collect.Lists;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ua.training.entities.Complaint;
 import ua.training.entities.TaxableItem;
 import ua.training.repositories.TaxableItemRepository;
 import ua.training.services.TaxableItemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 

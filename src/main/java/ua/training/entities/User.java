@@ -1,7 +1,6 @@
 package ua.training.entities;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
+//@ToString
 @Entity
 @Table(name = "persons")
 public class User {
@@ -34,30 +33,66 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Enumerated(EnumType.ORDINAL) //todo change indexation
-    private ROLE role;
+    @Transient
+    private String passwordConfirm;
+
+    @ManyToMany
+    @JoinTable(name = "persons_has_roles",
+            joinColumns = @JoinColumn(name = "id_person"),
+            inverseJoinColumns = @JoinColumn(name = "id_role"))
+    private Set<Role> roles = new HashSet<>();
+
+
+    //todo refactor this (its just for test/dev process)
+    @PrePersist
+    void preInsert() {
+        if (this.assignedInspector == null) {
+            User inspector = new User();
+            inspector.setId(1L);
+            this.assignedInspector = inspector;
+        }
+        if (this.roles.isEmpty()) {
+            Role role = new Role();
+            role.setId(1L);
+            role.setName("CLIENT");
+            roles.add(role);
+        }
+    }
 
     //this field in table is a reference on itself
-    @ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="id_inspector")
+    @ManyToOne(fetch = FetchType.LAZY
+            //, cascade = CascadeType.ALL
+            )
+    @JoinColumn(name = "id_inspector")
     private User assignedInspector;
 
     //mb fetch = FetchType.LAZY
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",
+            //cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private Set<Complaint> complaints = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "persons_has_taxable_items",
             joinColumns = @JoinColumn(name = "id_person"),
             inverseJoinColumns = @JoinColumn(name = "id_item"))
     private Set<TaxableItem> taxableItems = new HashSet<>();
 
-    @Version
-    @Column(name = "version")
-    private int version;
 
-    public enum ROLE {
-        INSPECTOR, CLIENT, UNKNOWN;
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", passwordConfirm='" + passwordConfirm + '\'' +
+                ", roles=" + roles +
+                ", complaints=" + complaints +
+                ", taxableItems=" + taxableItems +
+                '}';
     }
+
 }
+//: detached entity passed to persist: ua.training.entities.User

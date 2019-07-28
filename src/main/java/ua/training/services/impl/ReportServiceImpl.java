@@ -1,13 +1,12 @@
 package ua.training.services.impl;
 
 import com.google.common.collect.Lists;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import ua.training.entities.Report;
-import ua.training.entities.User;
 import ua.training.repositories.ReportRepository;
 import ua.training.services.ReportService;
-import ua.training.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
