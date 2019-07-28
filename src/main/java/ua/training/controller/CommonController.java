@@ -2,6 +2,7 @@ package ua.training.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ua.training.entities.Complaint;
 import ua.training.entities.Role;
@@ -17,14 +18,20 @@ import java.util.HashSet;
 
 @Controller
 public class CommonController {
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
+//    @GetMapping("/")
+//    public String index() {
+//        return "index";
+//    }
+//
+//    @GetMapping("/cabinet")
+//    public String personalCabinet(){
+//        return "cabinet";
+//    }
 
-    @GetMapping("/cabinet")
-    public String personalCabinet(){
-        return "cabinet";
+
+    @GetMapping({"/", "/welcome"})
+    public String welcome(Model model) {
+        return "welcome";
     }
 
 
