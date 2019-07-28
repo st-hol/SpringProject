@@ -1,10 +1,10 @@
 package ua.training.entities;
 
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +33,4 @@ public class TaxableItem {
     @Column(name = "price")
     private long price;
 
-    @Version
-    @Column(name = "version")
-    private int version;
 }

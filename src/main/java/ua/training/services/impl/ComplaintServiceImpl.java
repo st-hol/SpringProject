@@ -1,14 +1,13 @@
 package ua.training.services.impl;
 
 import com.google.common.collect.Lists;
+import ua.training.entities.Complaint;
+import ua.training.repositories.ComplaintRepository;
+import ua.training.services.ComplaintService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.training.entities.Complaint;
-import ua.training.entities.Report;
-import ua.training.repositories.ComplaintRepository;
-import ua.training.repositories.ReportRepository;
-import ua.training.services.ComplaintService;
-import ua.training.services.ReportService;
+
 
 import java.util.List;
 

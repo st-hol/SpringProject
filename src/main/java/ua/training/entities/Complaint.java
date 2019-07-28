@@ -1,9 +1,10 @@
 package ua.training.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -28,11 +29,8 @@ public class Complaint {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "completion_time")
-    private Timestamp completionTime;
+    private Date completionTime;
 
-    @Version
-    @Column(name = "version")
-    private int version;
 
 
 }
