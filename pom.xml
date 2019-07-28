@@ -72,8 +72,7 @@
         </dependency>
 
 
-        <!--        omg man so many fucking thank u for this-->
-        <!--        https://stackoverflow.com/questions/29015430/org-springframework-orm-jpa-vendor-hibernatejpavendoradapter-error/29016550#29016550-->
+        <!--  omg man -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
