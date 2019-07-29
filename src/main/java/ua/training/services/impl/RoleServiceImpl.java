@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.training.entities.Complaint;
 import ua.training.entities.Role;
+import ua.training.entities.User;
 import ua.training.repositories.ComplaintRepository;
 import ua.training.repositories.RoleRepository;
 import ua.training.services.ComplaintService;
@@ -38,4 +39,15 @@ public class RoleServiceImpl implements RoleService {
         this.roleRepository = roleRepository;
     }
 
+
+//    @Override
+//    public List<Role> findAllByUserName(String userName) {
+//        return roleRepository.findByPersons_userName(userName);
+//    }
+
+
+    @Override
+    public List<Role> findAllByUser(User user) {
+        return roleRepository.findAllByUsers(user);
+    }
 }

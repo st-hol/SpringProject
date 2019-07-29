@@ -10,4 +10,8 @@ public interface RoleService {
     List<Role> findAll();
     Role findById(Long id);
     Role save(Role role);
+
+    List<Role> findAllByUser(User user);
+
+//    List<Role> findAllByUserName(String userName);
 }

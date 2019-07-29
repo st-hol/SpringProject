@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+//import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -33,18 +33,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/shit").permitAll()
-                    .antMatchers("/login").permitAll()
+                    .antMatchers("/", "/welcome").permitAll()
                     .antMatchers("/resources/**").permitAll()
                     .antMatchers("/registration").permitAll()
-                    .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+                    .antMatchers("/personal-cabinet").hasAnyAuthority("CLIENT", "INSPECTOR")
+                    .antMatchers("/client/**").hasAuthority("CLIENT")
+                    .antMatchers("/inspector/**").hasAuthority("INSPECTOR")
+                    .anyRequest()
                     .authenticated()
                 .and()
                     .csrf().disable()
                     .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/complaints", true)
+                    .defaultSuccessUrl("/", true)
                     .permitAll()
                 .and()
                     .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -62,8 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-        auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+//        auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
     @Override

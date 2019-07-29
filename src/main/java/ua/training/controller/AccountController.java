@@ -34,7 +34,7 @@ public class AccountController {
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-        return "registration";
+        return "common/registration";
     }
 
     @PostMapping("/registration")
@@ -44,11 +44,11 @@ public class AccountController {
 
         if (bindingResult.hasErrors()) {
             logger.info("reg. form had errors. redirecting");
-            return "registration";
+            return "common/registration";
         }
 
-        userService.save(userForm);
-        securityService.autoLoginAfterReg(userForm.getEmail(), userForm.getPasswordConfirm());
+        userService.registerUser(userForm);
+        securityService.autoLoginAfterReg(userForm.getUsername(), userForm.getPasswordConfirm());
 
         logger.info("user registered");
         return "redirect:/registration";
@@ -62,7 +62,7 @@ public class AccountController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
 
-        return "login";
+        return "common/login";
     }
 
 

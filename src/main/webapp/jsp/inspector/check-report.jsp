@@ -10,10 +10,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
-<fmt:setLocale value="${sessionScope.lang}"/>
-<fmt:setBundle basename="messages"/>
 
-<html lang="${sessionScope.lang}">
+<html>
 <head>
     <title>
         <fmt:message key="check.reports"/>
@@ -22,11 +20,11 @@
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <jsp:include page="${pageContext.request.contextPath}/css/bootstrap_min.jsp"/>
-    <jsp:include page="${pageContext.request.contextPath}/js/jquery.jsp"/>
-    <jsp:include page="${pageContext.request.contextPath}/js/bootstrap_min.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/resources/css/bootstrap_min.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/resources/js/jquery.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/resources/js/bootstrap_min.jsp"/>
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css"/>
 </head>
 <body>
 
@@ -42,7 +40,7 @@
                 </h3>
             </div>
 
-            <form method="POST" class="form-horizontal" role="form" action="${pageContext.request.contextPath}/app/submit-checking-report">
+            <form method="POST" class="form-horizontal" role="form" action="${pageContext.request.contextPath}/inspector/checking-report">
 
                     <div class="form-group">
 
@@ -105,7 +103,7 @@
 
                     </div>
             </form>
-            <a class="" href="${pageContext.request.contextPath}/app/personal-cabinet">
+            <a class="" href="${pageContext.request.contextPath}/personal-cabinet">
                 <fmt:message key="back.to.cabinet"/>
             </a>
         </div>
@@ -116,12 +114,3 @@
 </body>
 </html>
 
-
-<%--<div class="col-md-3 col-sm-3">--%>
-<%--<div class="input-group">--%>
-<%--<span class="input-group-addon">--%>
-<%--<input type="checkbox" checked="">--%>
-<%--</span>--%>
-<%--<span type="text" class="form-control">Дача</span>--%>
-<%--</div>--%>
-<%--</div>--%>

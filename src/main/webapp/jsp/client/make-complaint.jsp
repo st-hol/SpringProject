@@ -2,18 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Stas
-  Date: 17/05/19
-  Time: 15:10
-  To change this template use File | Settings | File Templates.
---%>
 
-<fmt:setLocale value="${sessionScope.lang}"/>
-<fmt:setBundle basename="messages"/>
 
-<html lang="${sessionScope.lang}">
+
+<html>
 <head>
     <title>
         <fmt:message key="make.complaint"/>
@@ -22,11 +14,11 @@
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <jsp:include page="${pageContext.request.contextPath}/css/bootstrap_min.jsp"/>
-    <jsp:include page="${pageContext.request.contextPath}/js/jquery.jsp"/>
-    <jsp:include page="${pageContext.request.contextPath}/js/bootstrap_min.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/resources/css/bootstrap_min.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/resources/js/jquery.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/resources/js/bootstrap_min.jsp"/>
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/personal-cabinet.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/personal-cabinet.css"/>
 </head>
 <body>
 
@@ -41,7 +33,7 @@
             </h3>
         </div>
 
-        <form method="POST" class="" action="${pageContext.request.contextPath}/app/submit-complaint">
+        <form method="POST" class="" action="${pageContext.request.contextPath}/client/make-complaintt">
             <div class="form-group">
                 <div class="">
                         <textarea maxlength="45" minlength="5" name="content"
@@ -61,7 +53,7 @@
 
         </form>
 
-        <a class="" href="${pageContext.request.contextPath}/app/personal-cabinet">
+        <a class="" href="${pageContext.request.contextPath}/personal-cabinet">
             <fmt:message key="back.to.cabinet"/>
         </a>
     </div>

@@ -1,8 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
-<fmt:setLocale value="${sessionScope.lang}"/>
-<fmt:setBundle basename="messages"/>
 
 <div class="col-md-3">
     <div class="profile-sidebar position-fixed">
@@ -14,28 +12,28 @@
             </h5>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/app/make-report" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/client/make-report" class="nav-link">
                         <i class="fa fa-home"></i>
                         <fmt:message key="submit.report"/>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/app/edit-report">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/client/edit-report">
                         <i class="fa fa-check"></i>
                         <fmt:message key="edit.report"/>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/app/show-reports">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/client/show-reports">
                         <i class="fa fa-user"></i>
                         <fmt:message key="see.all.reports"/>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/app/make-complaint">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/client/make-complaint">
                         <i class="fa fa-check"></i>
                         <fmt:message key="make.complaint"/>
                     </a>
