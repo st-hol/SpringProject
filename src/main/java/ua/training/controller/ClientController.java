@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.training.entities.Complaint;
 import ua.training.entities.Report;
 import ua.training.entities.Role;
@@ -20,6 +17,7 @@ import ua.training.services.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -52,14 +50,21 @@ public class ClientController {
     @GetMapping(value = "/make-report")
     public String createReportForm(Model uiModel) {
 
-//        Report report1 = new Report();
-//        report1.setPerson(userService.findById(1L));
-//        reportService.save(report1);
-
         Report report = new Report();
         uiModel.addAttribute("report", report);
         return "client/make-report";
     }
+
+    @PostMapping(value = "/make-report")
+    public String saveReport(@ModelAttribute("report") Report report, Principal principal) {
+        User loggedInUser = userService.findByUsername(principal.getName());
+        report.setPerson(loggedInUser);
+        report.setCompletionTime(Calendar.getInstance().getTime());
+        reportService.save(report);
+        return "client/make-report";
+    }
+
+
 
     @GetMapping(value = "/edit-report/{id}")
     public String editReportForm(@PathVariable long id, Model uiModel) {

@@ -9,6 +9,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
+
+<c:set var="userPrincipal" value="${pageContext.request.userPrincipal}"/>
+
+
 <html>
 <head>
     <title>
@@ -37,6 +41,8 @@
         </div>
         <%--action="${pageContext.request.contextPath}/client/submit-report"--%>
         <form id="report-submit-ajax-form" class="" method="POST">
+
+           <!-- <input type="hidden" value="${userPrincipal}" name="person">-->
 
             <div id="ajax-succeed"></div>
 
