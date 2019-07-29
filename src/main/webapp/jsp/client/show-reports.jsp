@@ -26,6 +26,7 @@
             <th><fmt:message key="is.accepted"/></th>
             <th><fmt:message key="should.change"/></th>
             <th><fmt:message key="insp.comment"/></th>
+            <th></th>
         </tr>
 
         <c:forEach var="report" items="${reports}">
@@ -34,9 +35,13 @@
                 <td><c:out value="${report.taxpayerCode}"/></td>
                 <td><c:out value="${report.completionTime}"/></td>
                 <td><c:out value="${report.totalAmountOfProperty}"/></td>
-                <td><c:out value="${report.isAccepted}"/></td>
+                <td><c:out value="${report.accepted}"/></td>
                 <td><c:out value="${report.shouldBeChanged}"/></td>
                 <td><c:out value="${report.inspectorComment}"/></td>
+                <c:if test="${report.shouldBeChanged == true}">
+                    <td><a href="${pageContext.request.contextPath}/client/edit-report/${report.id}">edit</a></td>
+                </c:if>
+
             </tr>
         </c:forEach>
     </table>

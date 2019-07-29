@@ -5,6 +5,7 @@
 <%@ page isELIgnored="false" %>
 
 
+
 <html >
 <head>
     <title>
@@ -35,18 +36,9 @@
         <form method="POST" class="" action="${pageContext.request.contextPath}/client/edit-report">
 
             <div class="form-group">
-                <div class="">
-                    <select class="soflow-color" name="idReportToChange" required>
-                        <option value=""><fmt:message key="placeholder.choose.report"/></option>
-                        <c:forEach var="report" items="${reportsToChange}">
-                            <option value="${report.id}">
-                                id: <c:out value="${report.id}"/> |
-                                company: <c:out value="${report.companyName}"/>
-                            </option>
-                        </c:forEach>
-                    </select>
-                </div>
+                <input type="hidden" name="id" value="${report.id}"/>
             </div>
+
 
             <div class="form-group">
                 <div>

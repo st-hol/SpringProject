@@ -1,6 +1,8 @@
 package ua.training.services.impl;
 
 import com.google.common.collect.Lists;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ua.training.entities.Role;
@@ -58,8 +60,11 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
-
+    @Override
+    public User obtainCurrentPrincipleUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepository.findByUsername(userDetails.getUsername());
+    }
 }
 
 

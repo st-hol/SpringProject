@@ -34,7 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/", "/welcome").permitAll()
-                    .antMatchers("/resources/**").permitAll()
                     .antMatchers("/registration").permitAll()
                     .antMatchers("/personal-cabinet").hasAnyAuthority("CLIENT", "INSPECTOR")
                     .antMatchers("/client/**").hasAuthority("CLIENT")
@@ -45,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf().disable()
                     .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/", true)
+                    .defaultSuccessUrl("/personal-cabinet", true)
                     .permitAll()
                 .and()
                     .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -71,38 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+                .antMatchers("/resources/**", "/webjars/**");
     }
 
 }
-
-//    @Autowired
-//    private DataSource dataSource;
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                    .antMatchers("/", "/registration", "/locale", "/complaints").permitAll()
-//                    .anyRequest().authenticated()
-//                .and()
-//                    .formLogin()
-//                    .loginPage("/login")
-//                    .permitAll()
-//                    .defaultSuccessUrl("/userpage", true)
-//                .and()
-//                    .logout()
-//                    .permitAll()
-//                .and()
-//                    .exceptionHandling().accessDeniedPage("/accessdenied");
-//    }
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-//                .usersByUsernameQuery("select username, password, active from usr where username=?")
-//                .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_role ur on u.id = ur.user_id where u.username=?");
-//    }
-

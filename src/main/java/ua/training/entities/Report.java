@@ -2,6 +2,7 @@ package ua.training.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
 import static javax.persistence.GenerationType.IDENTITY;
 
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -38,7 +40,7 @@ public class Report {
     private User person;
 
     @Column(name = "is_accepted")
-    private boolean isAccepted;
+    private boolean accepted;
 
     @Column(name = "should_be_changed")
     private boolean shouldBeChanged;
@@ -48,12 +50,15 @@ public class Report {
 
 
 
-    public void setAcceptedFromInt(int iIsAccepted) {
-        isAccepted = (iIsAccepted != 0);
-    }
 
-    public void setShouldChangeFromInt(int iShouldChange) {
-        shouldBeChanged = (iShouldChange != 0);
-    }
+
+
+//    public void setAcceptedFromInt(int iIsAccepted) {
+//        isAccepted = (iIsAccepted != 0);
+//    }
+//
+//    public void setShouldChangeFromInt(int iShouldChange) {
+//        shouldBeChanged = (iShouldChange != 0);
+//    }
 
 }

@@ -7,10 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 
 
-<c:set var="userPrincipal" value="${pageContext.request.userPrincipal}"/>
+<%--<c:set var="userPrincipal" value="${pageContext.request.userPrincipal}"/>--%>
 
 
 <html>
@@ -42,7 +43,7 @@
         <%--action="${pageContext.request.contextPath}/client/submit-report"--%>
         <form id="report-submit-ajax-form" class="" method="POST">
 
-           <!-- <input type="hidden" value="${userPrincipal}" name="person">-->
+           <%-- <input type="hidden" value="${userPrincipal}" name="person">--%>
 
             <div id="ajax-succeed"></div>
 
