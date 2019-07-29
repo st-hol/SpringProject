@@ -33,7 +33,7 @@
             </h3>
         </div>
 
-        <form method="POST" class="" action="${pageContext.request.contextPath}/client/make-complaintt">
+        <form method="POST" class="" action="${pageContext.request.contextPath}/client/make-complaint">
             <div class="form-group">
                 <div class="">
                         <textarea maxlength="45" minlength="5" name="content"

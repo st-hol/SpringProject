@@ -25,7 +25,6 @@ import java.util.Set;
 @RequestMapping(value = "/client")
 public class ClientController {
 
-
     private final Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     @Autowired
@@ -55,29 +54,35 @@ public class ClientController {
         return "client/make-report";
     }
 
-    @PostMapping(value = "/make-report")
-    public String saveReport(@ModelAttribute("report") Report report, Principal principal) {
-        User loggedInUser = userService.findByUsername(principal.getName());
-        report.setPerson(loggedInUser);
-        report.setCompletionTime(Calendar.getInstance().getTime());
-        reportService.save(report);
-        return "client/make-report";
-    }
-
-
-
     @GetMapping(value = "/edit-report/{id}")
-    public String editReportForm(@PathVariable long id, Model uiModel) {
+    public String editReportForm(@PathVariable Long id, Model uiModel) {
         Report report = reportService.findById(id);
         uiModel.addAttribute("report", report);
         return "client/edit-report";
     }
 
+    @PostMapping(value = "/make-report")
+    public String saveReport(@ModelAttribute("report") Report report) {
+        report.setPerson(userService.obtainCurrentPrincipleUser());
+        report.setCompletionTime(Calendar.getInstance().getTime());
+        reportService.save(report);
+        return "redirect:/client/make-report";
+    }
 
     @PostMapping(value = "/make-complaint")
-    public String saveComplaint(@Valid Complaint complaint) {
+    public String saveComplaint(@ModelAttribute("complaint") Complaint complaint) {
+        complaint.setUser(userService.obtainCurrentPrincipleUser()
+                .getAssignedInspector());
+        complaint.setCompletionTime(Calendar.getInstance().getTime());
         complaintService.save(complaint);
-        return "redirect:/client/personal-cabinet";
+        return "redirect:/client/make-complaint";
+    }
+
+
+    @PostMapping(value = "/edit-report")
+    public String editReport(@RequestParam Long id, Report report) {
+        reportService.update(id, report);
+        return "redirect:/client/show-reports";
     }
 
 
@@ -85,7 +90,7 @@ public class ClientController {
     @GetMapping(value = "/show-reports")
     public String list(Model uiModel) {
         logger.info("Listing reports");
-        List<Report> reports = reportService.findAll();
+        List<Report> reports = reportService.findAllByPerson(userService.obtainCurrentPrincipleUser());
         uiModel.addAttribute("reports", reports);
         logger.info("No. of rec.: " + reports.size());
         return "client/show-reports";

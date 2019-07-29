@@ -19,13 +19,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/client/edit-report">
-                        <i class="fa fa-check"></i>
-                        <fmt:message key="edit.report"/>
-                    </a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/client/show-reports">
                         <i class="fa fa-user"></i>
                         <fmt:message key="see.all.reports"/>
