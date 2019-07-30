@@ -12,7 +12,7 @@
         <div class="profile-usermenu sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/inspector/check-report" class="nav-link active">
+                    <a href="${pageContext.request.contextPath}/inspector/show-reports" class="nav-link active">
                         <i class="fa fa-home"></i>
                         <fmt:message key="check.reports"/>
                     </a>

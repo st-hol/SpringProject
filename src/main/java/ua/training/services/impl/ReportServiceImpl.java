@@ -38,11 +38,26 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void update(long id, Report changed) {
+    public void edit(Long id, Report changed) {
         Report updated = reportRepository.findById(id).get();
         updated.setCompanyName(changed.getCompanyName());
         updated.setTaxpayerCode(changed.getTaxpayerCode());
+        updated.setShouldBeChanged(false);//reset flag
         reportRepository.save(updated);
+    }
+
+    @Override
+    public void check(Long id, Report changed) {
+        Report updated = reportRepository.findById(id).get();
+        updated.setAccepted(changed.isAccepted());
+        updated.setShouldBeChanged(changed.isShouldBeChanged());
+        updated.setInspectorComment(changed.getInspectorComment());
+        reportRepository.save(updated);
+    }
+
+    @Override
+    public List<Report> findAllReportsOfPersonsByAssignedInspector(User user) {
+        return Lists.newArrayList(reportRepository.findAllReportsOfPersonsByAssignedInspector(user));
     }
 
     @Autowired

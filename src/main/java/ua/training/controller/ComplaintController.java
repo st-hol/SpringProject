@@ -45,7 +45,7 @@ public class ComplaintController {
     @GetMapping(value = "/edit/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
         model.addAttribute("complaint", complaintService.findById(id));
-        return "update";
+        return "edit";
     }
 
 
@@ -53,7 +53,7 @@ public class ComplaintController {
     public String createForm(Model uiModel) {
         Complaint complaint = new Complaint();
         uiModel.addAttribute("complaint", complaint);
-        return "update";
+        return "edit";
     }
 
     @PostMapping

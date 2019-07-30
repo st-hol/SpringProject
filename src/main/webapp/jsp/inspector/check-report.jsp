@@ -40,32 +40,24 @@
                 </h3>
             </div>
 
-            <form method="POST" class="form-horizontal" role="form" action="${pageContext.request.contextPath}/inspector/checking-report">
+            <form method="POST" class="form-horizontal" role="form" action="${pageContext.request.contextPath}/inspector/check-report">
 
                     <div class="form-group">
 
-                        <div class="form-group">
-                            <select class="soflow-color" name="idReport" required>
-                                <option value=""><fmt:message key="placeholder.choose.report"/></option>
-                                <c:forEach var="report" items="${reports}">
-                                    <option value="${report.id}">
-                                        id: <c:out value="${report.id}"/> |
-                                        company: <c:out value="${report.companyName}"/>
-                                    </option>
-                                </c:forEach>
-                            </select>
-                        </div>
+  <div class="form-group">
+                <input type="hidden" name="id" value="${report.id}"/>
+            </div>
 
                         <span>
                             <fmt:message key="placeholder.accept"/>
                         </span>
                         <div  class="form-group">
                             <div class="md-radio">
-                                <input value="1" id="ac1" type="radio" name="isAccepted" checked>
+                                <input value="1" id="ac1" type="radio" name="accepted" checked>
                                 <label  for="ac1">+</label>
                             </div>
                             <div class="md-radio">
-                                <input value="0" id="ac2" type="radio" name="isAccepted">
+                                <input value="0" id="ac2" type="radio" name="accepted">
                                 <label for="ac2">-</label>
                             </div>
                         </div>

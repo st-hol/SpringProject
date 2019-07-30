@@ -15,6 +15,9 @@ public interface ReportService {
 
     Report save(Report report);
 
-    void update(long id, Report changed);
+    void edit(Long id, Report changed);
 
+    void check(Long id, Report changed);
+
+    List<Report> findAllReportsOfPersonsByAssignedInspector(User user);
 }

@@ -8,18 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.training.entities.Complaint;
 import ua.training.entities.Report;
-import ua.training.entities.Role;
-import ua.training.entities.User;
 import ua.training.services.ComplaintService;
 import ua.training.services.ReportService;
 import ua.training.services.UserService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.security.Principal;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/client")
@@ -81,7 +75,7 @@ public class ClientController {
 
     @PostMapping(value = "/edit-report")
     public String editReport(@RequestParam Long id, Report report) {
-        reportService.update(id, report);
+        reportService.edit(id, report);
         return "redirect:/client/show-reports";
     }
 
