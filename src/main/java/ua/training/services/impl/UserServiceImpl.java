@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ua.training.entities.Role;
+import ua.training.entities.TaxableItem;
 import ua.training.entities.User;
 import ua.training.repositories.UserRepository;
 import ua.training.services.UserService;
@@ -65,7 +66,20 @@ public class UserServiceImpl implements UserService {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userRepository.findByUsername(userDetails.getUsername());
     }
+
+    @Override
+    public Long calcSumOfPriceByTaxableItemsForUser(User user) {
+        Long totalAmount = userRepository.calcSumOfPriceByTaxableItemsForUser(user);
+        return totalAmount == null ? 0 : totalAmount;
+    }
+
+
 }
+
+
+
+
+
 
 
 //    public static User getDefaultInspectorInstance() {

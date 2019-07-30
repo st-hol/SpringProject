@@ -7,7 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.training.entities.Report;
+import ua.training.entities.TaxableItem;
+import ua.training.entities.User;
 import ua.training.services.ReportService;
+import ua.training.services.TaxableItemService;
 import ua.training.services.UserService;
 
 import java.util.List;
@@ -23,6 +26,8 @@ public class InspectorController {
     private ReportService reportService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private TaxableItemService taxableItemService;
 
     @GetMapping(value = "/personal-cabinet")
     public String personalCabinet() {
@@ -39,7 +44,7 @@ public class InspectorController {
     }
 
     @PostMapping(value = "/check-report")
-    public String editReport(@RequestParam Long id, Report report) {
+    public String checkReport(@RequestParam Long id, Report report) {
         reportService.check(id, report);
         return "redirect:/inspector/show-reports";
     }
@@ -57,9 +62,21 @@ public class InspectorController {
     }
 
 
-//    @GetMapping(value = "/set-taxable")
-//    public String setTaxableForm(@PathVariable long id, Model uiModel) {
-//        return "";
-//    }
+    @GetMapping(value = "/set-taxable")
+    public String setTaxableForm(Model uiModel) {
+        List<TaxableItem> taxableItems = taxableItemService.findAll();
+        uiModel.addAttribute("items", taxableItems);
+        List<User> users = userService.findAll();
+        uiModel.addAttribute("users", users);
+        return "inspector/set-taxable";
+    }
+
+    @PostMapping(value = "/set-taxable")
+    public String setTaxable(@RequestParam Long idItem, @RequestParam Long idUser) {
+        User user = userService.findById(idUser);
+        user.getTaxableItems().add(taxableItemService.findById(idItem));
+        userService.save(user);
+        return "redirect:/inspector/set-taxable";
+    }
 
 }

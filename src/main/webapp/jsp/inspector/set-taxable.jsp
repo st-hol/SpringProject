@@ -35,11 +35,11 @@
         <form method="POST" class="form-horizontal" action="${pageContext.request.contextPath}/inspector/set-taxable">
 
             <div class="form-group">
-                <select class="soflow-color" name="idPerson" required>
+                <select class="soflow-color" name="idUser" required>
                     <option value=""><fmt:message key="placeholder.choose.person"/></option>
-                    <c:forEach var="person" items="${persons}">
-                        <option value="${person.id}">
-                            <c:out value="${person.firstName} ${person.lastName}"/>
+                    <c:forEach var="user" items="${users}">
+                        <option value="${user.id}">
+                            <c:out value="id:[${user.id}], full name:[${user.firstName} ${user.lastName}]"/>
                         </option>
                     </c:forEach>
                 </select>
@@ -55,14 +55,7 @@
                     </c:forEach>
                 </select>
             </div>
-
-            <div class="form-group">
-                <div class="">
-                    <input maxlength="10" minlength="1" min="0" name="quantity" type="number"
-                           placeholder="<fmt:message key="placeholder.quantity"/>" class="col-12" required>
-                </div>
-            </div>
-
+            
             <br>
 
             <div class="form-group">

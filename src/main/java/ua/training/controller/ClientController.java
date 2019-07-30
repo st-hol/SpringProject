@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.training.entities.Complaint;
 import ua.training.entities.Report;
+import ua.training.entities.User;
 import ua.training.services.ComplaintService;
 import ua.training.services.ReportService;
 import ua.training.services.UserService;
@@ -57,8 +58,10 @@ public class ClientController {
 
     @PostMapping(value = "/make-report")
     public String saveReport(@ModelAttribute("report") Report report) {
-        report.setPerson(userService.obtainCurrentPrincipleUser());
+        User loggedInUser = userService.obtainCurrentPrincipleUser();
+        report.setPerson(loggedInUser);
         report.setCompletionTime(Calendar.getInstance().getTime());
+        report.setTotalAmountOfProperty(userService.calcSumOfPriceByTaxableItemsForUser(loggedInUser));
         reportService.save(report);
         return "redirect:/client/make-report";
     }

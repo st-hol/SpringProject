@@ -10,6 +10,7 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+
 @Getter
 @Setter
 @Entity
@@ -23,8 +24,8 @@ public class TaxableItem {
 
     @ManyToMany
     @JoinTable(name = "persons_has_taxable_items",
-            joinColumns = @JoinColumn(name = "id_item"),
-            inverseJoinColumns = @JoinColumn(name = "id_person"))
+            joinColumns = @JoinColumn(name = "id_item", referencedColumnName = "id_item"),
+            inverseJoinColumns = @JoinColumn(name = "id_person", referencedColumnName = "id_person"))
     private Set<User> persons = new HashSet<>();
 
     @Column(name = "name_item")
@@ -33,4 +34,13 @@ public class TaxableItem {
     @Column(name = "price")
     private long price;
 
+
+    @Override
+    public String toString() {
+        return "TaxableItem{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
