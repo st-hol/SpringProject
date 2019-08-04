@@ -3,6 +3,10 @@ package ua.training.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -83,13 +87,21 @@ public class ClientController {
     }
 
 
-    //todo pagination
+
     @GetMapping(value = "/show-reports")
-    public String list(Model uiModel) {
-        logger.info("Listing reports");
-        List<Report> reports = reportService.findAllByPerson(userService.obtainCurrentPrincipleUser());
-        uiModel.addAttribute("reports", reports);
-        logger.info("No. of rec.: " + reports.size());
+    public String list(Model uiModel,
+//            @PageableDefault(sort = { "id_report" }, direction = Sort.Direction.DESC) Pageable pageable)
+              Pageable pageable)
+    {
+        User currentUser = userService.obtainCurrentPrincipleUser();
+        Page<Report> page = reportService.findAllByPerson(currentUser, pageable);
+
+        uiModel.addAttribute("page", page);
+        uiModel.addAttribute("url", "/client/show-reports");
+
         return "client/show-reports";
     }
+
+
+
 }

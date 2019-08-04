@@ -91,9 +91,8 @@ public class User {
                 ", passwordConfirm='" + passwordConfirm + '\'' +
                 ", roles=" + roles +
                 ", complaints=" + complaints +
-                ", taxableItems=" + taxableItems +
+            //    ", taxableItems=" + taxableItems +
                 '}';
     }
 
 }
-//: detached entity passed to persist: ua.training.entities.User

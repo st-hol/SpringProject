@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false" %>
 
 
@@ -29,7 +30,7 @@
         <div class="panel-heading clearfix">
             <i class="icon-calendar"></i>
             <h3 class="panel-title">
-                <fmt:message key="make.complaint"/>
+                <spring:message code="make.complaint"/>
             </h3>
         </div>
 
@@ -37,7 +38,7 @@
             <div class="form-group">
                 <div class="">
                         <textarea maxlength="45" minlength="5" name="content"
-                                  placeholder="<fmt:message key="placeholder.write.charge"/>"
+                                  placeholder="<spring:message code="placeholder.write.charge"/>"
                                   class="col-12" required>
                         </textarea>
                 </div>
@@ -46,7 +47,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary btn-sm">
-                        <fmt:message key="label.submit"/>
+                        <spring:message code="label.submit"/>
                     </button>
                 </div>
             </div>
@@ -54,7 +55,7 @@
         </form>
 
         <a class="" href="${pageContext.request.contextPath}/personal-cabinet">
-            <fmt:message key="back.to.cabinet"/>
+            <spring:message code="back.to.cabinet"/>
         </a>
     </div>
 </div>

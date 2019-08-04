@@ -8,13 +8,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false" %>
 
 
 <html>
 <head>
     <title>
-        <fmt:message key="check.reports"/>
+        <spring:message code="check.reports"/>
     </title>
 
     <meta name="viewport" content="width=device-width"/>
@@ -36,7 +37,7 @@
             <div class="panel-heading clearfix">
                 <i class="icon-calendar"></i>
                 <h3 class="panel-title offset-2">
-                    <fmt:message key="check.reports"/>
+                    <spring:message code="check.reports"/>
                 </h3>
             </div>
 
@@ -49,7 +50,7 @@
             </div>
 
                         <span>
-                            <fmt:message key="placeholder.accept"/>
+                            <spring:message code="placeholder.accept"/>
                         </span>
                         <div  class="form-group">
                             <div class="md-radio">
@@ -63,7 +64,7 @@
                         </div>
 
                         <span>
-                            <fmt:message key="should.change"/>
+                            <spring:message code="should.change"/>
                         </span>
                         <div  class="form-group">
                             <div class="md-radio">
@@ -79,7 +80,7 @@
                         <div  class="form-group">
                             <div class="">
                                 <textarea maxlength="100" minlength="1" name="inspectorComment" class="col-12"
-                                          placeholder="<fmt:message key="insp.comment"/>" required>
+                                          placeholder=" <spring:message code="insp.comment"/>" required>
                                 </textarea>
                             </div>
                         </div>
@@ -88,7 +89,7 @@
                         <div  class="form-group">
                             <div class="">
                                 <button type="submit" class="btn btn-primary btn-sm">
-                                    <fmt:message key="label.submit"/>
+                                    <spring:message code="label.submit"/>
                                 </button>
                             </div>
                         </div>
@@ -96,7 +97,7 @@
                     </div>
             </form>
             <a class="" href="${pageContext.request.contextPath}/personal-cabinet">
-                <fmt:message key="back.to.cabinet"/>
+                <spring:message code="back.to.cabinet"/>
             </a>
         </div>
     </div>

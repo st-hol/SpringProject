@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false" %>
 
 
@@ -8,27 +9,27 @@
         <!-- SIDEBAR MENU -->
         <div class="profile-usermenu sidebar-sticky">
             <h5 class="text-primary">
-                <fmt:message key="label.client"/>
+                <spring:message code="label.client"/>
             </h5>
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/client/make-report" class="nav-link">
                         <i class="fa fa-home"></i>
-                        <fmt:message key="submit.report"/>
+                        <spring:message code="submit.report"/>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/client/show-reports">
                         <i class="fa fa-user"></i>
-                        <fmt:message key="see.all.reports"/>
+                        <spring:message code="see.all.reports"/>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/client/make-complaint">
                         <i class="fa fa-check"></i>
-                        <fmt:message key="make.complaint"/>
+                        <spring:message code="make.complaint"/>
                     </a>
                 </li>
 

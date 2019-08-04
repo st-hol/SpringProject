@@ -3,6 +3,10 @@ package ua.training.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +39,6 @@ public class InspectorController {
     }
 
 
-
     @GetMapping(value = "/check-report/{id}")
     public String checkReportForm(@PathVariable Long id, Model uiModel) {
         Report report = reportService.findById(id);
@@ -47,18 +50,6 @@ public class InspectorController {
     public String checkReport(@RequestParam Long id, Report report) {
         reportService.check(id, report);
         return "redirect:/inspector/show-reports";
-    }
-
-
-    //todo pagination
-    @GetMapping(value = "/show-reports")
-    public String list(Model uiModel) {
-        logger.info("Listing reports");
-        List<Report> reports = reportService.findAllReportsOfPersonsByAssignedInspector(userService
-                .obtainCurrentPrincipleUser());
-        uiModel.addAttribute("reports", reports);
-        logger.info("No. of rec.: " + reports.size());
-        return "inspector/show-reports";
     }
 
 
@@ -79,4 +70,28 @@ public class InspectorController {
         return "redirect:/inspector/set-taxable";
     }
 
+
+    @GetMapping(value = "/show-reports")
+    public String list(Model uiModel,
+//            @PageableDefault(sort = { "id_report" }, direction = Sort.Direction.DESC) Pageable pageable)
+                       Pageable pageable) {
+        User currentUser = userService.obtainCurrentPrincipleUser();
+        Page<Report> page = reportService.findAllReportsOfPersonsByAssignedInspector(currentUser, pageable);
+
+        uiModel.addAttribute("page", page);
+        uiModel.addAttribute("url", "/inspector/show-reports");
+
+        return "inspector/show-reports";
+    }
+
+//    //todo pagination
+//    @GetMapping(value = "/show-reports")
+//    public String list(Model uiModel) {
+//        logger.info("Listing reports");
+//        List<Report> reports = reportService.findAllReportsOfPersonsByAssignedInspector(userService
+//                .obtainCurrentPrincipleUser());
+//        uiModel.addAttribute("reports", reports);
+//        logger.info("No. of rec.: " + reports.size());
+//        return "inspector/show-reports";
+//    }
 }

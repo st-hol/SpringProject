@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false" %>
 
 
@@ -29,7 +30,7 @@
 
         <div class="panel-heading clearfix">
             <h3 class="panel-title">
-                <fmt:message key="edit.report"/>
+                <spring:message code="edit.report"/>
             </h3>
         </div>
 
@@ -43,14 +44,14 @@
             <div class="form-group">
                 <div>
                     <input maxlength="45" minlength="1" name="companyName" type="text"
-                           placeholder="<fmt:message key="placeholder.company.name"/>" required>
+                           placeholder="<spring:message code="placeholder.company.name"/>" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="">
                     <input maxlength="45" minlength="1" name="taxpayerCode" type="number"
-                           placeholder="<fmt:message key="placeholder.taxpayer.code"/>" required>
+                           placeholder="<spring:message code="placeholder.taxpayer.code"/>" required>
                 </div>
             </div>
 
@@ -59,13 +60,13 @@
             <div class="form-group">
                 <div class="">
                     <button type="submit" class="btn btn-primary btn-sm">
-                        <fmt:message key="label.submit"/>
+                        <spring:message code="label.submit"/>
                     </button>
                 </div>
             </div>
         </form>
         <a class="" href="${pageContext.request.contextPath}/personal-cabinet">
-            <fmt:message key="back.to.cabinet"/>
+            <spring:message code="back.to.cabinet"/>
         </a>
     </div>
 </div>

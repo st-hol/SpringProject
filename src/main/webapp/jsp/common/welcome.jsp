@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false" %>
 
 <c:set var="userName" value="${pageContext.request.userPrincipal.name}"/>
@@ -22,20 +23,20 @@
 
 </head>
 <body>
-     <c:if test="${userName != null}">
-            <form id="logoutForm" method="POST" action="${contextPath}/logout">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
+<c:if test="${userName != null}">
+    <form id="logoutForm" method="POST" action="${contextPath}/logout">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
 
-            <h2>
-                Welcome ${pageContext.request.userPrincipal.name} | You are already logged in
-                You can go to <a href="${contextPath}/personal-cabinet">personal cabinet</a>
-                or <a onclick="document.forms['logoutForm'].submit()">Logout</a>
-            </h2>
-        </c:if>
-        <c:if test="${userName == null}">
-             <h2>Hello. guest</h2>
-        </c:if>
+    <h2>
+        Welcome ${pageContext.request.userPrincipal.name} | You are already logged in
+        You can go to <a href="${contextPath}/personal-cabinet">personal cabinet</a>
+        or <a onclick="document.forms['logoutForm'].submit()">Logout</a>
+    </h2>
+</c:if>
+<c:if test="${userName == null}">
+    <h2>Hello. guest</h2>
+</c:if>
 <jsp:include page="${pageContext.request.contextPath}/jsp/common/navbar-landing.jsp"/>
 
 <header class="header">
@@ -44,17 +45,16 @@
         <div class="description text-left">
             <h3>
                 <span>
-                    <fmt:message key="tax.report"/>
+                        <spring:message code="tax.report"/>
                 </span>
                 <p>
-                    <fmt:message key="landing.welcome"/>
+                    <spring:message code="landing.welcome"/>
                 </p>
             </h3>
         </div>
 
     </div>
 </header>
-
 
 
 </body>
