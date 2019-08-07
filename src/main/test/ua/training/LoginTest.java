@@ -17,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class LoginTest {
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -29,14 +30,22 @@ public class LoginTest {
     }
 
 
-//    @Test
-//    @WithUserDetails("client@g.c")
-//    public void When_TryingToAccessInspectorPrivilegesWithClientRight_Then_Show403() throws Exception {
-//        this.mockMvc.perform(get("/inspector/show-reports"))
-//                .andDo(print())
-////                .andExpect(status().is4xxClientError())
-//                .andExpect(status().isForbidden())
-//                .andExpect(redirectedUrl("http://localhost/error/403"));
-//    }
+    @Test
+    @WithUserDetails("client@g.c")
+    public void When_TryingToAccessInspectorPrivilegesWithClientRight_Then_Show403() throws Exception {
+        this.mockMvc.perform(get("/inspector/personal-cabinet"))
+                .andDo(print())
+                .andExpect(status().is4xxClientError())
+                .andExpect(status().isForbidden())
+                .andExpect(forwardedUrl("/error/403"));
+    }
 
+    @Test
+    @WithUserDetails("admin@g.c")
+    public void When_TryingToAccessClientPrivilegesWithInspectorRight_Then_AllowAccess() throws Exception {
+        this.mockMvc.perform(get("/client/personal-cabinet"))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(forwardedUrl("/jsp/client/client-base.jsp"));;
+    }
 }

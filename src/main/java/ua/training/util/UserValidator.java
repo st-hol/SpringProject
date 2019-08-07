@@ -43,7 +43,4 @@ public class UserValidator implements Validator {
         }
     }
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 }
