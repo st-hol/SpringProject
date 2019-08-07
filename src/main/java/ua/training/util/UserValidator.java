@@ -1,6 +1,7 @@
 package ua.training.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -12,6 +13,7 @@ import ua.training.services.UserService;
 public class UserValidator implements Validator {
 
     @Autowired
+    @Qualifier("userServiceImpl")
     private UserService userService;
 
     @Override
@@ -39,5 +41,9 @@ public class UserValidator implements Validator {
         if (!user.getPasswordConfirm().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
         }
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

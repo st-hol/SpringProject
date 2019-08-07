@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 public class TaxableItemServiceImpl implements TaxableItemService {
 
+    @Autowired
     private TaxableItemRepository taxableItemRepository;
 
     @Override

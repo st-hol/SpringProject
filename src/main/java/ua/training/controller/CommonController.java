@@ -34,13 +34,7 @@ public class CommonController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
-    @Autowired
-    private ComplaintService complaintService;
-    @Autowired
-    private SecurityService securityService;
-    @Autowired
-    @Qualifier("userDetailsServiceImpl")
-    private UserDetailsService userDetailsService;
+
 
 
     @GetMapping({"/", "/welcome"})
@@ -58,7 +52,7 @@ public class CommonController {
         User loggedInUser = userService.findByUsername(principal.getName());
         List<Role> userRoles = roleService.findAllByUser(loggedInUser);
 
-        //todo refactor this piece of shit
+        //todo refactor this
         Role inspectorRole = roleService.findById(0L);
         Role clientRole = roleService.findById(1L);
 
@@ -72,32 +66,5 @@ public class CommonController {
 
     }
 
-//
-//    @GetMapping("/shit")
-//    public String shit() {
-//
-//        User user = new User();
-//        user.setFirstName("11s");
-//        user.setLastName("s11s");
-//        user.setUsername("d11sf");
-//        user.setPassword("12");
-//
-//        Role role = new Role();
-//        role.setId(0L);
-//        role.setName("INSPECTOR");
-//        user.setRoles(Collections.singleton(role));
-//
-//        Complaint complaint = new Complaint();
-//        complaint.setContent("fdsa");
-//        complaint.setCompletionTime(Calendar.getInstance().getTime());
-//        User user1 = new User();
-//        user1.setId(1);
-//        complaint.setUser(user1);
-//
-//        complaintService.save(complaint);
-//        userService.save(user);
-//
-//        return "redirect:/complaints";
-//    }
 
 }
