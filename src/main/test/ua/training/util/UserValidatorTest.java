@@ -32,27 +32,19 @@ public class UserValidatorTest {
 
 
     @Test
-    public void testValidationWithValidAddress() {
+    public void Given_CorrectInputData_WhenCheckingWithValidator_Then_ShouldBeNoErrors() {
 
         UserValidator userValidator = new UserValidator();
-        userValidator.setUserService(userService);//why it is not autowired.
-
-
-        User validUser = new User();
+        userValidator.setUserService(userService); //it must work without setter. why it is not autowired
 
         //everything to make it valid
+        User validUser = new User();
         validUser.setPassword("123");
         validUser.setPasswordConfirm("123");
         validUser.setUsername("testusername");
 
-
-//        Mockito.doReturn(null)
-//                .when(userService)
-//                .findByUsername("testusername");
-
         Mockito.when(userService.findByUsername("testusername"))
                 .thenReturn(null);
-
 
         Errors errors = new BeanPropertyBindingResult(validUser, "validUser");
         userValidator.validate(validUser, errors);
@@ -60,44 +52,88 @@ public class UserValidatorTest {
         assertFalse(errors.hasErrors());
     }
 
-//
-//    @Test
-//    public void testValidationWithEmptyFirstNameAddress() {
-//        AdressValidator addressValidator = new AddressValidator();
-//        CustomValidator validatorUnderTest = new CustomValidator(adressValidator);
-//
-//        Address validAddress = new Address();
-//        invalidAddress.setFirstName("")
-//        invalidAddress.set...everything to make it valid exept the first name
-//
-//        Errors errors = new BeanPropertyBindingResult(invalidAddress, "invalidAddress");
-//        validatorUnderTest.validate(invalidAddress, errors);
-//
-//        assertTrue(errors.hasErrors());
-//        assertNotNull(errors.getFieldError("firstName"));
-//    }
 
+    @Test
+    public void Given_InvalidUsername_WhenCheckingWithValidator_Then_ShouldBeUsernameError() {
+        UserValidator userValidator = new UserValidator();
+        userValidator.setUserService(userService); //it must work without setter. why it is not autowired
 
-//    @Test
-//    public void addUserFailTest() {
-//        User user = new User();
-//
-//        user.setUsername("John");
-//
-//        Mockito.doReturn(new User())
-//                .when(userRepository)
-//                .findByUsername("John");
-//
-//
-//
-//        Assert.assertFalse(isUserCreated);
-//
-//        Mockito.verify(userRepo, Mockito.times(0)).save(ArgumentMatchers.any(User.class));
-//        Mockito.verify(mailSender, Mockito.times(0))
-//                .send(
-//                        ArgumentMatchers.anyString(),
-//                        ArgumentMatchers.anyString(),
-//                        ArgumentMatchers.anyString()
-//                );
-//    }
+        //everything to make it valid except the username
+        User userWithInvalidUsername = new User();
+        userWithInvalidUsername.setPassword("123");
+        userWithInvalidUsername.setPasswordConfirm("123");
+        userWithInvalidUsername.setUsername("1");
+
+        Mockito.when(userService.findByUsername("1"))
+                .thenReturn(null);
+
+        Errors errors = new BeanPropertyBindingResult(userWithInvalidUsername, "userWithInvalidUsername");
+        userValidator.validate(userWithInvalidUsername, errors);
+
+        assertTrue(errors.hasErrors());
+        assertNotNull(errors.getFieldError("username"));
+    }
+
+    @Test
+    public void Given_ExistingUsername_WhenCheckingWithValidator_Then_ShouldBeUsernameError() {
+        UserValidator userValidator = new UserValidator();
+        userValidator.setUserService(userService); //it must work without setter. why it is not autowired
+
+        //everything to make it valid except the username
+        User userWithExistingUsername = new User();
+        userWithExistingUsername.setPassword("123");
+        userWithExistingUsername.setPasswordConfirm("123");
+        userWithExistingUsername.setUsername("testusername");
+
+        Mockito.when(userService.findByUsername("testusername"))
+                .thenReturn(new User());
+
+        Errors errors = new BeanPropertyBindingResult(userWithExistingUsername, "userWithExistingUsername");
+        userValidator.validate(userWithExistingUsername, errors);
+
+        assertTrue(errors.hasErrors());
+        assertNotNull(errors.getFieldError("username"));
+    }
+
+    @Test
+    public void Given_InvalidPassword_WhenCheckingWithValidator_Then_ShouldBePasswordError() {
+        UserValidator userValidator = new UserValidator();
+        userValidator.setUserService(userService); //it must work without setter. why it is not autowired
+
+        //everything to make it valid except the username
+        User userWithInvalidPassword = new User();
+        userWithInvalidPassword.setPassword("#");
+        userWithInvalidPassword.setPasswordConfirm("#");
+        userWithInvalidPassword.setUsername("testusername");
+
+        Mockito.when(userService.findByUsername("testusername"))
+                .thenReturn(null);
+
+        Errors errors = new BeanPropertyBindingResult(userWithInvalidPassword, "userWithInvalidPassword");
+        userValidator.validate(userWithInvalidPassword, errors);
+
+        assertTrue(errors.hasErrors());
+        assertNotNull(errors.getFieldError("password"));
+    }
+
+    @Test
+    public void Given_DifferentPasswords_WhenCheckingWithValidator_Then_ShouldBePasswordError() {
+        UserValidator userValidator = new UserValidator();
+        userValidator.setUserService(userService); //it must work without setter. why it is not autowired
+
+        //everything to make it valid except the username
+        User userWithDifferentPasswords = new User();
+        userWithDifferentPasswords.setPassword("password_itself");
+        userWithDifferentPasswords.setPasswordConfirm("password_confirmation");
+        userWithDifferentPasswords.setUsername("testusername");
+
+        Mockito.when(userService.findByUsername("testusername"))
+                .thenReturn(null);
+
+        Errors errors = new BeanPropertyBindingResult(userWithDifferentPasswords, "userWithDifferentPasswords");
+        userValidator.validate(userWithDifferentPasswords, errors);
+
+        assertTrue(errors.hasErrors());
+        assertNotNull(errors.getFieldError("passwordConfirm"));
+    }
 }
