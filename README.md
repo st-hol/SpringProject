@@ -1,4 +1,5 @@
 # TaxReportSystem 
+____________________________________________________________________________________________________________________
 # Based on Spring Framework (Servlet version you can see in older repository)
 ____________________________________________________________________________________________________________________
 
@@ -9,6 +10,7 @@ ________________________________________________________________________________
 Пользователь может просмотреть все поданные отчеты, причины отказа и изменять их если того потребовал Инспектор. 
 Пользователь может отправлять запрос на замену Инспектора в случае неудовлетворения.
 
+____________________________________________________________________________________________________________________
 >>> The system of filing reports to the tax. Fiz. Legal entity (hereinafter referred to as User) is registered. Submit report (XML / JSON / Form). 
 The tax inspector accepts / rejects the report.
 The user can view all submitted reports, reasons for refusal and change them if requested by the Inspector.
